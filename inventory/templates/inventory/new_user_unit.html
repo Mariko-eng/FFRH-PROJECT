@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<div style="display: flex;
+    flex-direction: column;">
+    <form method="post">
+        {% csrf_token %}
+        <div style="display: flex;
+            flex-direction: column;">
+            <h2 style="color:darkblue; text-align:center;">ADD PRODUCT TO NEW USER-UNIT FROM HERE</h2>
+            <p style="text-align:center; color:red; font-size:small;">{{ status }}</p>
+            <div style="display:flex; justify-content:space-around; padding:1rem;flex-wrap:wrap;">
+                <div class="box" style="margin-top:0.2rem;border:2px solid;
+                padding-left:2rem;padding-right:2rem;
+                padding-top:0.5rem;padding-bottom:1.5rem;">
+                    <p>PRODUCT DESCRIPTION</p>
+                    <p>{{ form.productDetail }}</p>
+                </div>
+                <div class="box" style="margin-top:0.2rem;border:2px solid; padding-left:2rem;padding-right:2rem;
+                padding-top:0.5rem;padding-bottom:1.5rem;">
+                    <p>USER UNIT</p>
+                    <p>{{ form.user_unit }}<p>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center">
+                <button style="color:cornsilk;background:blue;
+                    padding:0.5rem; border:1px solid blue;
+                    border-radius:10%;cursor: pointer;" type="submit">SUBMIT DATA
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+{% block extra_css %}
+<style>
+    input{
+    width:500px;
+    height:15px;
+    border-bottom:1px solid darkblue;
+    border-top:0;border-left:0;border-right:0;
+    }
+    .box{
+        border-radius: 3%;
+        color: darkmagenta
+    }
+</style>
+{% endblock %}
+{% block extra_script %}
+{% endblock %}
+
+
+

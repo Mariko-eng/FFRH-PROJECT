@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{  margin:0;
+            padding:0;
+            font-family: sans-serif;
+            box-sizing:border-box;
+        }
+        body{
+            min-height:100vh;
+            z-index:100;
+            background: linear-gradient(360deg, #004D40, transparent);
+        }
+        .aa{
+            color:cornsilk;width:50px; height: 100%;
+            padding-top: 5.5px;
+            padding-left: 10.5px;
+            background: darkkhaki;
+            position:fixed;
+            z-index:1000;
+            overflow: hidden;
+            transition:1s;
+        }
+        .aa:hover{
+            width:150px;
+        }
+        .ab{
+            position:relative;
+            color:yellow;
+            text-align:center;
+        }
+        .abc{
+            position:absolute;
+            left:50px;
+            padding: 0;
+        }
+        ul{
+            padding-top: 15px;
+        }
+        ol{
+            height: 40px;
+        }
+        .bb{
+            padding-left: 5rem;
+        }
+        .hh:hover::before{
+            content: "MARK";
+            position: absolute;
+            top:30px;
+            left:40px;
+        }
+    </style>
+</head>
+<body>
+<div class="aa">
+    <ul>
+        <ol><span class="ab">##</span><span class="abc">Home</span></ol>
+        <ol><span class="ab">##</span><span class="abc">About</span></ol>
+        <ol><span class="ab">##</span><span class="abc">Services</span></ol>
+        <ol><span class="ab">##</span><span class="abc">Contact Us</span></ol>
+    </ul>
+</div>
+<div class="bb">
+    <div style="position:relative;">
+        <h1 class="hh">QWERTYS ICON3BT</h1>
+    </div>
+</div>
+
+
+</body>
+</html>

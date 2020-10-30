@@ -1,0 +1,132 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+    <div style="display:flex; flex-direction:row">
+        <div style="width:10vh; height:inherit; border-right:2px solid blue; flex-direction:column;
+        min-width: fit-content; padding-right: 1rem; padding-left:0.4rem;
+        background: darkblue; text-transform: uppercase;">
+            <p><a href="{% url 'dashboard' %}">Dash Board</a></p>
+            <p><a href="{% url 'currentstock' %}">Available Stock</a></p>
+            <p><a href="{% url 'output' %}">Issue Out Products</a></p>
+            {% if request.user.is_staff %}
+            <p><a href="{% url 'stockNew' %}">Add To Existing Stock</a></p>
+            <p><a href="{% url 'product' %}">Add New Products</a></p>
+            <p><a href="{% url 'update_delete' %}">Update Products</a></p>
+            {% endif %}
+        </div>
+        <div style="flex-grow:1; display:flex; flex-direction:column;padding-left:1rem;">
+            <div style="margin-top:0.5rem;display:flex;justify-content:space-around;font-style: italic;
+            color:cornsilk;">
+                <div style="background:darkblue; padding:1rem;border-radius:10%;">
+                    <h4 style="text-align:center;">TOTAL NO OF STOCK-OUTS</h4>
+                    <hr/>
+                    <h1 style="text-align:center;margin:0;">{{ total_orders }}</h1>
+                </div>
+                <div style="background:darkred;padding:1rem;border-radius:10%;">
+                    <h4 style="text-align:center;">TOTAL NO OF STOCK-INS</h4>
+                    <hr/>
+                    <h1 style="text-align:center;margin:0;">{{ total_deliveries }}</h1>
+                </div>
+                <div style="background:darkgreen;padding:1rem;border-radius:10%;">
+                    <h4 style="text-align:center;">TOTAL NO OF PRODUCTS</h4>
+                    <hr/>
+                    <h1 style="text-align:center;margin:0;">{{ total_products }}</h1>
+                </div>
+            </div>
+        <div>
+            <h1 style="text-align:center;">AVAILABLE DRUGS AND OTHER UTILTIES</h1>
+        </div>
+        <div>
+            <div style="display:flex; width: 1100px; height:250px; overflow-x:auto;
+            padding-bottom:5px; padding-top:5px; padding-left:5px; padding-right:5px;">
+            {% for product in allproducts %}
+            <div style="min-width:200px; height:200px; margin:2px;
+                border-radius:10%; box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+                margin-left:8px; margin-right: 8px; text-align: center;overflow:hidden; position:relative;">
+                <p> Code : {{ product.code }}</p>
+                <p> Name : {{ product.description }}</p>
+                <p> Current Stock : {{ product.currentStock}}</p>
+                <p style="position:absolute; bottom:0;">
+                    <a href="{% url 'productinfo' product.code %}">
+                        STOCK-OUT & STOCK-IN
+                    </a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    <div class="last5" style="display:flex; justify-content: space-evenly">
+        <div class="last5deliveries" style="display:flex; flex-direction:column;">
+            <h3 style="text-align:center;">LAST 5 STOCK-IN QTY</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Delivery Date</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if product %}
+                {% for product in last5deliveries %}
+                <tr>
+                    <td>{{ product.deliveryDate }}</td>
+                    <td>{{ product.productLink }} </td>
+                    <td>{{ product.deliveredQty }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="last5orders" style="display:flex; flex-direction:column;">
+            <h3 style="text-align:center;">LAST 5 STOCK-OUT QTY</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Order Date</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Pharmacy/Clinic/Ward</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if product %}
+                {% for product in last5orders %}
+                <tr>
+                    <td>{{ product.consumptionDate }}</td>
+                    <td>{{ product.productLink }}</td>
+                    <td>{{ product.consumptionQty }}</td>
+                    <td>{{ product.pharmacies }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                    <td>None</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div> </div>
+
+{% endblock %}
+{% block extra_css %}
+<style>
+    body > div > div:nth-child(2) > div > div:nth-child(1) > p > a{
+        color:cornsilk;
+    }
+</style>
+{% endblock %}
+{% block extra_script %}
+{% endblock %}

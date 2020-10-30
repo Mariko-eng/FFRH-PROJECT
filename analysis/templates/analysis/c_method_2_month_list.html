@@ -1,0 +1,113 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div class="eoq" style="overflow:auto;">
+    <h2 style="text-align:center;margin:0;">CONSUMPTION METHOD DATA SUMMARY FOR 2 MONTH CYCLE</h2>
+<table style="padding:1rem;">
+    <thead>
+    <tr>
+        <th>NO</th>
+        <th>NAME</th>
+        <th>PLANNED QTY FOR 2 MONTHS</th>
+        <th>ORDER COST FOR 2 MONTHS</th>
+        <th>ANNUAL PLAN COST</th>
+        <th>(AMC) MONTHLY MEAN CONSUMPTION</th>
+        <th>% CHANGE IN CONSUMPTION </th>
+        <th>AMC ADJUSTED FOR CHANGES</th>
+        <th>SAFETY STOCK</th>
+        <th>2 MONTH QTY TO PROCURE</th>
+        <th>2 MONTH CYCLE COST OF PROCUREMENT</th>
+        <th>BUDGETARY DEFICIT IN PLAN</th>
+        <th>% AVAILABLE FUNDING</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in data_df %}
+    <tr>
+        <td><a href="{% url 'cmethod2cde' i.code %}">{{ i.code }}</a></td>
+        <td>{{ i.desc }}</td>
+        <td>{{ i.planned_Qty_Month_Mean }}</td>
+        <td>{{ i.plannedQty2Month_order_cost }}</td>
+        <td>{{ i.annualplancost }}</td>
+        <td>{{ i.amc_in_packs }}</td>
+        <td>{{ i.percentage_change_in_consumption }}</td>
+        <td>{{ i.amc_adjusted_for_changes }}</td>
+        <td>{{ i.safety_stock }}</td>
+        <td>{{ i.calculated_2Month_qty_to_procure }}</td>
+        <td>{{ i.calculated_2Month_cost_of_procurement }}</td>
+        <td>{{ i.budget_deficit_in_plan }}</td>
+        <td>{{ i.percentage_available_funding }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<div style="margin-right: 10px; text-align: center;">
+    {% if data_df.has_previous %}
+    <a href="{% url 'cmethod2list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
+    {% endif %}
+    {% if data_df.has_next %}
+    <a href="{% url 'cmethod2list' %}?page={{ data_df.next_page_number }}">Next Page</a>
+    {% endif %}
+</div>
+{% endblock %}
+{% block extra_css %}
+<style>
+    .header{
+        background: cornsilk;
+    }
+    body > div > div.header > p{
+        border-top: 1px solid darkcyan;
+        border-left: 2px solid darkblue;
+        border-radius:10%;
+        padding:5px;
+    }
+    body > div > div.header > p:hover{
+        border-top: 2px solid darkblue;
+        border-left: 1px solid darkcyan;
+        transition:3s;
+        transform:scale(1.3)
+    }
+    .eoq{
+        display:flex;
+        flex-direction:column;
+    }
+    h2{
+        color: brown;
+    }
+    h2:hover{
+        color:darkcyan;
+        transition:3s;
+        transform:scaleX(0.5)
+    }
+    th{
+    padding:0;
+    color : darkcyan;
+    transform: rotateZ(15deg);
+    }
+    th:hover{
+    color : darkcyan;
+    transform: rotateZ(360deg);
+    transition:2s;
+    }
+    td{
+    border: 1px solid darkblue;
+    color:darkblue;
+    text-align:center;
+    }
+    tbody>tr:hover{
+    z-index:100;
+    transition:2s;
+    transform:scale(0.98)
+    }
+    tbody>tr>td:hover{
+    border:0;
+    background-color:white;
+    color: brown;
+    text-align:right;
+    z-index:1000;
+    transition:2s;
+    transform:scale(1.5)
+    }
+</style>
+{% endblock %}

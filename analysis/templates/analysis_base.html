@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            margin:0;
+            font-family: sans-serif;
+        }
+        .header{
+            display :flex;
+            background: cornsilk;
+            height:4rem;
+            justify-content: space-evenly;
+            border-bottom: 10px solid palegoldenrod;
+        }
+        button{
+            cursor: pointer;
+        }
+        a {
+            text-decoration : none;
+        }
+        td{
+           border: 1px solid blue;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/myCss.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+    {{ resources | safe}}
+
+</head>
+<body>
+<div style="display: flex; flex-direction: column; min-height:100vh;">
+    <div class="header">
+        <p style="flex-grow:1;margin-left:3rem;margin-right:5rem;"><a href="{% url 'productsDashboard' %}">
+            FORT PORTAL REGIONAL REFERRAL HOSPITAL</a></p>
+        <p style="margin-left:1rem;margin-right:2rem;"><a href="{% url 'productsDashboard' %}">DASHBOARD</a></p>
+        <p style="margin-right: 3rem;;padding-right:10px;"><a href="{% url 'inventoryLink' %}">TO INVENTORY</a></p>
+        {% if request.user %}
+        <p style="margin-right: 3rem;;padding-right:10px;"><span>Hi {{ request.user }}</span>
+            <a href="{% url 'logout_user' %}">LOG OUT</a></p>
+        {% else %}
+        <p style="margin-right: 3rem;;padding-right:10px;"><a href="{% url 'login_user' %}">LOG IN</a></p>
+        {% endif %}
+    </div>
+
+    <div class="main" style="flex-grow:1">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div style="display :flex; background:cornsilk; height:3rem; justify-content: space-evenly;">
+        <p>@Copyright Fort Portal Regional Referral Hospital</p>
+    </div>
+</div>
+</body>
+{% block extra_script %}
+{% endblock %}
+{% block extra_css %}
+{% endblock %}
+</html>

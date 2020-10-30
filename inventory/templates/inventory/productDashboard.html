@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align:center; color:darkblue;">{{ product }} General Information</h1>
+<h1 style="text-align:center; color: aquamarine;">Current Stock : {{ productCurrentStock }}</h1>
+<div class="lastall" style="display:flex; justify-content: space-evenly">
+        <div class="lastalldeliveries" style="display:flex; flex-direction:column;">
+            <h3>Deliveries</h3>
+            {% if productDelivery.count == 0 %}
+                <h1 style="color:red";> No new Stock Delivered, SORRY! </h1>
+            {% else %}
+            <table>
+                <tr>
+                    <td>Delivery Date</td>
+                    <td>Quantity</td>
+                </tr>
+                {% for product in productDelivery %}
+                <tr>
+                    <td>{{ product.deliveryDate }}</td>
+                    <td>{{ product.deliveredQty }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+        <div class="lastallorders" style="display:flex; flex-direction:column;">
+            <h3>Consumption</h3>
+            {% if productConsumption.count == 0 %}
+                <h1 style="color:red;"> No Orders Made Yet, SORRY! </h1>
+            {% else %}
+            <table>
+                <tr>
+                    <td>Consumption Date</td>
+                    <td>Quantity</td>
+                    <td>Pharmacy/Clinic/Ward</td>
+                </tr>
+                {% for product in productConsumption %}
+                <tr>
+                    <td>{{ product.consumptionDate }}</td>
+                    <td>{{ product.consumptionQty }}</td>
+                    <td>{{ product.pharmacies }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <h4> Minimum Order Value : {{ cQty_Min.consumptionQty__min }}</h4>
+            <h4> Maximum Order Value : {{ cQty_Max.consumptionQty__max }}</h4>
+            <h4> Total Order Value : {{ cQty_Sum.consumptionQty__sum }}</h4>
+            <h4> Average Order Value : {{ cQty_Avg.consumptionQty__avg }}</h4>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

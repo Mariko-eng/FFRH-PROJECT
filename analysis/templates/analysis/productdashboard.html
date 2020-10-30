@@ -1,0 +1,142 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div style="display:flex; justify-content:center; padding:1rem;">
+    <div class="side">
+        <p><input id="searchbar" type="number" placeholder="Search Product CODE"
+        style="width: -webkit-fill-available; position:relative;"></p>
+        <div id="results" style="width:-webkit-fill-available position:absolute;color:cornsilk;
+        background-color: darkred;"></div>
+        <hr/>
+        <p><a href="{% url 'productsDashboard' %}">~DASHBOARD</a></p>
+        <hr/>
+        <p style="color: aqua;">PRODUCT LINKS</p>
+        <p><a href="{% url 'productVisual' %}">~Get Single Product Stats</a></p>
+        <p><a href="{% url 'a_currentStock' %}">~Get All Products</a></p>
+        <hr/>
+        <p style="color: aqua;">CONSUMPTION METHODS</p>
+        <p><a href="{% url 'cmethod2list' %}">~~ 2-Month Consumption Method</a></p>
+        <p style="padding:0.5rem;"><a href="{% url 'graphs2c' %}">~~ Consumption Graphs</a></p>
+        <p><a href="{% url 'cmethod3list' %}">~~ 3-Month Consumption Method</a></p>
+        <p style="padding:0.5rem;"><a href="{% url 'graphs3c' %}">~~ Consumption Graphs</a></p>
+        <hr/>
+        <p style="color: aqua;">ECONOMIC ORDER QUANTITY MODELS</p>
+        <p><a href="{% url 'eoq2list' %}">~~ 2-Month Economic Order Quantity Model</a></p>
+        <p style="padding:0.5rem;"><a href="{% url 'graphs2e' %}">~~ EOQ Graphs</a></p>
+        <p><a href="{% url 'eoq3list' %}">~~ 3-Month Economic Order Quantity Model</a></p>
+        <p style="padding:0.5rem;"><a href="{% url 'graphs2e' %}">~~ EOQ Graphs</a></p>
+        <p style="color: aqua;">~~ FUNDING POSITION</p>
+        <p><a href="{% url 'underfunding2' %}">~~ 2-Month UNDER FUNDING</a></p>
+        <p><a href="{% url 'overfunding2' %}">~~ 2-Month OVER FUNDING</a></p>
+        <p><a href="{% url 'underfunding3' %}">~~ 3-Month UNDER FUNDING</a></p>
+        <p><a href="{% url 'overfunding3' %}">~~ 3-Month OVER FUNDING</a></p>
+    </div>
+    <div class="bk-root side2" style="width: 1400px;height:550px;overflow: auto;
+    display:flex; flex-direction:column;">
+        <p style="margin-top:0px;
+        margin-bottom:0px;"><input id="searchbar2" type="text" placeholder="Search Product CODE And NAME"
+        style="width: -webkit-fill-available; position:relative; "></p>
+        <a href="{% url 'graphs' %}" style="color:cornsilk;margin:0;
+        text-align:center; font-size:large;">...Click Here To View Full Graph...</a>
+        <div id="results2" style="width:-webkit-fill-available height:-webkit-fill-available
+        position:absolute;
+        color:cornsilk;background-color: darkblue;"></div>
+        {{ the_div | safe }}
+        {{ the_script | safe }}
+    </div>
+</div>
+{% endblock %}
+{% block extra_css %}
+<style>
+    .header{
+        background: cornsilk;
+        animation-name: headbar;
+        animation-duration: 3s;
+    }
+    @keyframes headbar{
+    0%{background:maroon; transform:translateY(-50px);}
+    25%{background:brown; transform:translateY(-10px);}
+    50%{background:cornsilk;transform:translateY(-30px);}
+    75%{background:cornsilk;transform:translateY(-40px);}
+    100%{background:white;transform:translateY(-5px);}
+    }
+    body > div > div.header > p{
+        border-top: 1px solid darkcyan;
+        border-left: 2px solid darkblue;
+        border-radius:10%;
+        padding:5px;
+    }
+    body > div > div.header > p:hover{
+        border-top: 2px solid darkblue;
+        border-left: 1px solid darkcyan;
+        transition:2s;
+        transform:scale(1.2)
+    }
+    .side{
+        font-size:smaller;
+        width:180px;
+        margin-right: 1.2rem;
+        background:maroon;
+        padding:10px;
+        box-shadow: 3px 3px 3px 3px darkred;
+        height: 530px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .side2{
+        margin-right: 1.5rem;
+        background:darkblue;
+        padding:5px;
+        box-shadow: 3px 3px 3px 3px darkred;
+    }
+    .side>p{
+        text-align:left;
+    }
+    .side>p>a{
+        color:cornsilk;
+    }
+    .side>p:hover{
+        transform: scaleX(1.1);
+    }
+    .main{
+    background: url("/static/images/imagesE.jpeg");
+    background-position:center;
+    background-size :cover;
+    }
+    #results > p > a {
+        color: aquamarine;
+    }
+    #results2 > p > a {
+        color: aquamarine;
+    }
+</style>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    $(document).ready(function(){
+        $("#searchbar").keyup(function(){
+            $.ajax({
+                type : "GET",
+                url : "/analysis/ajax/request/",
+                data : {'cde':$("#searchbar").val()},
+                dataType : "html",
+                success:function(data){
+                    $("#results").html(data);
+                }
+            });
+        });
+        $("#searchbar2").keyup(function(){
+            $.ajax({
+                type : "GET",
+                url : "/analysis/ajax/request1/",
+                data : {'cde':$("#searchbar2").val()},
+                dataType : "html",
+                success:function(data){
+                    $("#results2").html(data);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

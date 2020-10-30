@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            margin:0;
+            font-family: sans-serif;
+        }
+        a {
+            text-decoration : none;
+        }
+        button{
+            cursor: pointer;
+        }
+        .header{
+            display :flex;
+            background: cornsilk;
+            height:4rem;
+            justify-content: space-evenly;
+            border-bottom: 10px solid palegoldenrod;
+        }
+        body > div > div.header > p{
+            border-top: 1px solid darkcyan;
+            border-left: 2px solid darkblue;
+            border-radius:10%;
+            padding:5px;
+        }
+        body > div > div.header > p:hover{
+            border-top: 2px solid darkblue;
+            border-left: 1px solid darkcyan;
+            transition:3s;
+            transform:scale(1.3)
+        }
+        th:hover{
+            color : darkcyan;
+            transform: rotateZ(360deg);
+            transition:2s;
+        }
+        td{
+            border: 1px solid darkblue;
+            color:darkblue;
+            text-align:center;
+        }
+        tbody>tr:hover{
+            z-index:100;
+            transition:2s;
+            transform:scale(0.98)
+        }
+        tbody>tr>td:hover{
+            border:0;
+            background-color:white;
+            color: brown;
+            z-index:1000;
+            transition:2s;
+            transform:scale(1.1)
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/myCss.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+</head>
+<body>
+<div style="display: flex; flex-direction: column; min-height:100vh;">
+    <div class="header">
+        <p style="flex-grow:1;margin-left:3rem;margin-right:5rem;"><a href="{% url 'dashboard' %}">
+            FORT PORTAL REGIONAL REFERRAL HOSPITAL</a></p>
+        <p style="margin-left:1rem;margin-right:2rem;"><a href="{% url 'dashboard' %}">Dash Board</a></p>
+        {% if request.user.is_staff %}
+        <p style="margin-right: 3rem;;padding-right:10px;"><a href="{% url 'adminlink' %}">TO ANALYSIS</a></p>
+        {% endif %}
+        {% if request.user %}
+        <p style="margin-right: 3rem;;padding-right:10px;"><span>Hi {{ request.user }}</span>
+            <a href="{% url 'logout_user' %}">LOG OUT</a></p>
+        {% else %}
+        <p style="margin-right: 3rem;;padding-right:10px;"><a href="{% url 'login_user' %}">LOG IN</a></p>
+        {% endif %}
+    </div>
+
+    <div style="flex-grow:1">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div style="display :flex; background:cornsilk; height:3rem; justify-content: space-evenly;">
+        <p>@Copyright Fort Portal Regional Referral Hospital</p>
+    </div>
+</div>
+</body>
+{% block extra_script %}
+{% endblock %}
+{% block extra_css %}
+{% endblock %}
+</html>

@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div style="display: flex;
+    flex-direction: column;
+    align-items: center">
+    <form method="post" class="box-form" style="border: 3px solid;
+    margin: 0.5rem;text-transform: uppercase;
+    color:darkmagenta; border-radius:3%;
+    padding: 2rem;border:2px solid;
+    background: beige;position:relative;">
+        {% csrf_token %}
+        <div class="akantu1" style="position:absolute; width:5px;
+        height:5px; top:-0.2rem;left:0.2rem border-radius:10%;">
+            <img style="height:inherit;width:inherit;border-radius:inherit;"src="/static/images/car.png" alt="pic"/>
+        </div>
+        <div class="akantu2" style="position:absolute; width:5px;
+        height:5px; bottom:0rem;right:0.2rem; border-radius:10%;">
+            <img style="height:inherit;width:inherit;border-radius:inherit;"src="/static/images/car.png" alt="pic"/>
+        </div>
+        <p style="font-size:large;">ADD TO EXISTING STOCK</p>
+        <hr/>
+        <p>Product</p>
+        {{ form.productDetail }}
+        <p>Quantity</p>
+        <p>{{ form.deliveredQty }}</p>
+        <button type="submit" style="color:cornsilk;
+        background:darkgreen; border-radius:10%;
+        border:2px solid darkgreen;
+        padding:5px;"> REQUEST DRUGS</button>
+    </form>
+</div>
+{% endblock %}
+{% block extra_css %}
+<style>
+    .box-form{
+        animation : box 15s ease-in infinite;
+    }
+    @keyframes box {
+    0%{
+    color:darkblue;}
+    25%{
+    color: darkred;}
+    50%{
+    color:darkgrey;}
+    100%{
+    color:magenta;}
+    }
+    .akantu1{
+        animation : kantu1 20s ease-in infinite;
+    }
+    @keyframes kantu1 {
+    0%{box-shadow: 2px 2px 2px 1px darkblue; background:magenta;
+    transform:translateX(0px);}
+    25%{box-shadow: 2px 2px 2px 1px darkred; background:white;
+    transform:translateX(100px);}
+    50%{box-shadow: 2px 2px 2px 1px darkyellow;background:black;
+    transform:translateX(200px)}
+    90%{box-shadow: 2px 2px 2px 1px brown; background:gold;
+    transform:translateX(400px)}
+    100%{box-shadow: 2px 2px 2px 2px darkgreen; background:blue;
+    transform:translateX(700px)}
+    }
+    .akantu2{
+        animation : kantu2 10s ease-in infinite;
+    }
+    @keyframes kantu2 {
+    0%{box-shadow: 2px 2px 2px 1px darkblue; background:yellow;
+    transform:translateX(0px);}
+    50%{box-shadow: 2px 2px 2px 1px darkred; background:pink;
+    transform:translateX(-100px);}
+    70%{box-shadow: 2px 2px 2px 1px darkyellow; background:green;
+    transform:translateX(-200px)}
+    90%{box-shadow: 2px 2px 2px 1px brown; background:blue;
+    transform:translateX(-400px)}
+    100%{box-shadow: 2px 2px 2px 2px darkgreen;background:magenta;
+    transform:translateX(-700px)}
+    }
+</style>
+{% endblock %}
+<script type="text/javascript">
+    form_fields = document.querySelectorAll("input");
+    form_fields.forEach((field) =>{
+        field.autocomplete = "OFF";
+    });
+</script>

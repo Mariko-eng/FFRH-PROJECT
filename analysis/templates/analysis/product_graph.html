@@ -1,0 +1,13 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div style="display:flex;flex-direction:column; align-items:center;">
+    <div class="bk-root" style="width: 1300px;min-height:550px;overflow: auto;">
+        {{ the_div | safe }}
+        {{ the_script | safe }}
+    </div>
+</div>
+{% endblock %}
+
+
+

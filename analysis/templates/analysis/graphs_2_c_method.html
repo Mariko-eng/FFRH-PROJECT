@@ -1,0 +1,40 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div style="display:flex;flex-direction:column; align-items:center;">
+    <div style="display: flex;
+        justify-content: center; padding-top:1rem;">
+        <form method="get">
+        {% csrf_token %}
+            <select name="stat">
+                <option value="planned_Qty_2Month_Mean" selected>Planned Qty 2-Month Mean</option>
+                <option value="planned_Qty_Month_Mean">Planned Qty Monthly Mean</option>
+                <option value="plannedQtyMonth_order_cost">Planned Monthly Order Cost</option>
+                <option value="plannedQty2Month_order_cost">Planned 2Month Order Cost</option>
+                <option value="annual_plan_cost">Annual Plan Cost</option>
+                <option value="percentage_change_in_consumption">Percentage Change In Consumption</option>
+                <option value="amc_adjusted_for_stock_outs">AMC Adjusted For Stock-Outs</option>
+                <option value="amc_adjusted_for_changes">AMC Adjusted For Changes</option>
+                <option value="safety_stock">Safety Stock</option>
+                <option value="calculated_2Month_qty_to_procure">Calculated 2-Month QTY To Procure</option>
+                <option value="calculated_2_month_cycle_cost_of_procurement_in_millions">Calculated 2-Month Cost Of Procurement</option>
+                <option value="budget_deficit_in_plan">Budget Deficit In Plan</option>
+                <option value="percentage_available_funding">Percentage Available Funding</option>
+            </select>
+            <button type="submit">Draw Graph</button>
+        </form>
+    </div>
+
+    <div class="bk-root side2" style="width: 1300px;min-height:550px;overflow: auto;
+    display:flex; flex-direction:column;">
+        <div id="results2" style="width:-webkit-fill-available height:-webkit-fill-available
+        position:absolute;
+        color:cornsilk;background-color: darkblue;"></div>
+        {{ the_div | safe }}
+        {{ the_script | safe }}
+    </div>
+</div>
+{% endblock %}
+
+
+

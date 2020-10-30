@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            margin:0;
+            font-family: sans-serif;
+        }
+        a {
+            text-decoration : none;
+        }
+        button{
+            cursor: pointer;
+        }
+        .header{
+            display :flex;
+            background: cornsilk;
+            height:4rem;
+            justify-content: space-evenly;
+            border-bottom: 10px solid palegoldenrod;
+        }
+        body > div > div.header > p{
+            border-top: 1px solid darkcyan;
+            border-left: 2px solid darkblue;
+            border-radius:10%;
+            padding:5px;
+        }
+        body > div > div.header > p:hover{
+            border-top: 2px solid darkblue;
+            border-left: 1px solid darkcyan;
+            transition:3s;
+            transform:scale(1.3)
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/myCss.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+</head>
+<body>
+<div style="display: flex; flex-direction: column; min-height:100vh;">
+    <div class="header">
+        <p style="flex-grow:1;margin-left:3rem;margin-right:5rem;">
+            <a href="{% url 'dashboard' %}">
+            FORT PORTAL REGIONAL REFERRAL HOSPITAL</a>
+        </p>
+        <p style="margin-right: 3rem;;padding-right:10px;">
+            <a href="{% url 'login_user' %}">LOG IN HERE</a>
+        </p>
+    </div>
+    <div style="flex-grow:1">
+        <div style="display:flex; height:500px; justify-content:center; align-items:center;">
+            <form method="post">
+            {% csrf_token %}
+                <p>REGISTER NEW ACCOUNT</p>
+                <p>{{ form.username.errors }}</p>
+                <p>{{ form.username }}</p>
+                <p>{{ form.email.errors }}</p>
+                <p>{{ form.email }}</p>
+                <p>{{ form.password1.errors }}</p>
+                <p>{{ form.password1 }}</p>
+                <p>{{ form.password2.errors }}</p>
+                <p>{{ form.password2 }}</p>
+                <button type="submit">SUBMIT</button>
+                <p>Already Have An Account?</p>
+                <a href="{% url 'login_user' %}">Login Here</a>
+            </form>
+        </div>
+    </div>
+    <div style="display :flex; background:cornsilk; height:3rem; justify-content: space-evenly;">
+        <p>@Copyright Fort Portal Regional Referral Hospital</p>
+    </div>
+</div>
+    <script type="text/javascript">
+    var form_fields = document.querySelectorAll("input");
+    form_fields[1].placeholder = "UserName";
+        form_fields[1].autocomplete = "OFF";
+    form_fields[2].placeholder = "Email";
+        form_fields[2].autocomplete = "OFF";
+    form_fields[3].placeholder = "Password";
+        form_fields[3].autocomplete = "OFF";
+    form_fields[4].placeholder = "Repeat Password";
+        form_fields[4].autocomplete = "OFF";
+</script>
+</body>
+</html>

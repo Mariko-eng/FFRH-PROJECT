@@ -1,0 +1,127 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div class="eoq" style="overflow:auto;">
+    <h2 style="text-align:center;margin:0;">ECONOMIC ORDER QUANTITY MODEL DATA SUMMARY FOR 2 MONTH CYCLE</h2>
+    <table style="padding:1rem;">
+        <thead>
+        <tr>
+            <th>NO</th>
+            <th>NAME</th>
+            <th>MONTHLY MEAN CONSUMPTION IN PACKS</th>
+            <th>YEARLY DEMAND</th>
+            <th>CARRYING COST</th>
+            <th>ORDERING COST</th>
+            <th style="color:darkred;">ECONOMIC ORDER QUANTITY</th>
+            <th>ANNUAL CARRYING COST</th>
+            <th>ANNUAL ORDERING COST</th>
+            <th>ANNUAL INVENTORY MGT COST</th>
+            <th>ANNUAL DEMAND COST</th>
+            <th>LENGTH OF ORDER CYCLE (DAYS)</th>
+            <th>NUMBER OF CYCLES PER YEAR</th>
+            <th>INVESTMENT COST PER CYCLE</th>
+            <th>INVESTMENT COST PER YEAR</th>
+            <th>ANNUAL TOTAL COST</th>
+            <th>PERCENTAGE INVENTORY MGT COST</th>
+            <th>PLAN BUDGET DEFICIT</th>
+            <th>PERCENTAGE AVAILABLE FUNDING</th>
+            <th>Funding_Position</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for i in data_df %}
+    <tr>
+        <td><a href="{% url 'eoq2cde' i.CODE %}">{{ i.CODE }}</a></td>
+        <td>{{ i.DESCRIPTION }}</td>
+        <td>{{ i.amc_in_packs }}</td>
+        <td>{{ i.yearly_demand }}</td>
+        <td>{{ i.carrying_cost }}</td>
+        <td>{{ i.ordering_cost }}</td>
+        <td style="color:darkred;">{{ i.economic_order_quantity }}</td>
+        <td>{{ i.annual_carrying_cost }}</td>
+        <td>{{ i.annual_ordering_cost }}</td>
+        <td>{{ i.annual_inventory_mgt_cost }}</td>
+        <td>{{ i.annual_demand_cost }}</td>
+        <td>{{ i.length_of_order_cycle_days }}</td>
+        <td>{{ i.number_cycles_per_year }}</td>
+        <td>{{ i.investment_cost_per_cycle }}</td>
+        <td>{{ i.investment_cost_per_year }}</td>
+        <td>{{ i.annual_total_cost }}</td>
+        <td>{{ i.percentage_inventory_mgt_cost }}</td>
+        <td>{{ i.plan_budget_deficit }}</td>
+        <td>{{ i.percentage_available__funding }}</td>
+        <td>{{ i.Funding_Position }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div style="text-align: center">
+    {% if data_df.has_previous %}
+    <a style="margin-right: 10px;" href="{% url 'eoq2list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
+    {% endif %}
+    {% if data_df.has_next %}
+    <a href="{% url 'eoq2list' %}?page={{ data_df.next_page_number }}">Next Page</a>
+    {% endif %}
+</div>
+{% endblock %}
+{% block extra_css %}
+<style>
+    .header{
+        background: cornsilk;
+    }
+    body > div > div.header > p{
+        border-top: 1px solid darkcyan;
+        border-left: 2px solid darkblue;
+        border-radius:10%;
+        padding:5px;
+    }
+    body > div > div.header > p:hover{
+        border-top: 2px solid darkblue;
+        border-left: 1px solid darkcyan;
+        transition:3s;
+        transform:scale(1.3)
+    }
+    .eoq{
+        display:flex;
+        flex-direction:column;
+    }
+    h2{
+        color: brown;
+    }
+    h2:hover{
+        color:darkcyan;
+        transition:3s;
+        transform:scaleX(0.5)
+    }
+    th{
+    padding:0;
+    color : darkcyan;
+    transform: rotateZ(15deg);
+    }
+    th:hover{
+    color : darkcyan;
+    transform: rotateZ(360deg);
+    transition:2s;
+    }
+    td{
+    border: 1px solid darkblue;
+    color:darkblue;
+    text-align:center;
+    }
+    tbody>tr:hover{
+    z-index:100;
+    transition:2s;
+    transform:scale(0.98)
+    }
+    tbody>tr>td:hover{
+    border:0;
+    background-color:white;
+    color: brown;
+    text-align:right;
+    z-index:1000;
+    transition:2s;
+    transform:scale(1.5)
+    }
+</style>
+{% endblock %}

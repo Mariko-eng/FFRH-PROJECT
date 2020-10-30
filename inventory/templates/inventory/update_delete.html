@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align : center;color : blue; ">Available Drugs</h1>
+<div style="display:flex; justify-content:center;">
+    <table>
+        <thead>
+            <tr><th></th>
+                <th></th>
+                <th>CODE</th>
+                <th>DESCRIPTION</th>
+                <th> VEN</th>
+                <th>UNIT</th>
+                <th>PRICE</th>
+                <th>PLANNED QUANTITY 2-MONTH MEAN</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in allProducts %}
+            <tr><td style="color:cornsilk;padding:0.5rem; border:1px solid darkgreen; border-radius:10%;background:darkgreen; border:0;">
+                    <a style="color:white;" href="{% url 'update_stock' product.code %}">UPDATE</a></td>
+                <td style="color:cornsilk;background:darkred;padding:0.5rem; border:1px solid darkred;
+                border-radius:10%;; border:0;">
+                    <a style="color:white;" href="{% url 'delete_stock' product.code %}">DELETE</a>
+                </td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.ven }}</td>
+                <td>{{ product.unit }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.planned_Qty_2Month_Mean }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

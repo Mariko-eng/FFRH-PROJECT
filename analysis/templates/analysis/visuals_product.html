@@ -1,0 +1,188 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div style="display:flex;flex-direction:column; align-items:center;">
+    <h1>{{ productData.code }} : {{ productData.description }}</h1>
+    <div style="display:flex; flex-direction:row;">
+        <div>
+{% if s_type == 'STATISTICS' %}
+<p></p>
+{% else %}
+    {% if s_type == 'SUM' %}
+        {% if v_type == 'Year' or v_type == 'Month' %}
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ v_type }}</th>
+                    <th>Total Consumption Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if v_type == 'Month' %}
+                {% for i in data_df %}
+                    <tr>
+                        <td>{{ i.Month }}</td>
+                        <td>{{ i.consumptionQty }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for i in data_df %}
+                    <tr>
+                        <td>{{ i.Year }}</td>
+                        <td>{{ i.consumptionQty }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Total Consumption Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data_df %}
+                <tr>
+                    <td>{{ i.Year }}</td>
+                    <td>{{ i.Month }}</td>
+                    <td>{{ i.consumptionQty }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    {% else %}
+        {% if s_type == 'MEAN' %}
+            {% if v_type == 'Year' or v_type == 'Month' %}
+            <table>
+                <thead>
+                <tr>
+                    <th>{{ v_type }}</th>
+                    <th>Mean Consumption Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if v_type == 'Month' %}
+                {% for i in data_df %}
+                    <tr>
+                        <td>{{ i.Month }}</td>
+                        <td>{{ i.consumptionQty }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for i in data_df %}
+                    <tr>
+                        <td>{{ i.Year }}</td>
+                        <td>{{ i.consumptionQty }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+                </tbody>
+            </table>
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Month</th>
+                        <th>Mean Consumption Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in data_df %}
+                <tr>
+                    <td>{{ i.Year }}</td>
+                    <td>{{ i.Month }}</td>
+                    <td>{{ i.consumptionQty }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        {% endif %}
+    {% endif%}
+{% endif %}
+        {% if qty_stats %}
+        <p style="border-bottom: 2px solid;">Months Of Stock : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.months_of_stock }}</span></p>
+        <p style="border-bottom: 2px solid;">Total QTY Of Consumption : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_sum }}</span></p>
+        <p style="border-bottom: 2px solid;">Mean QTY Of Consumption : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_mean }}</span></p>
+        <p style="border-bottom: 2px solid;">Min QTY Of Consumption : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_min }}</span></p>
+        <p style="border-bottom: 2px solid;">Median QTY Of Consumption : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_median }}</span></p>
+        <p style="border-bottom: 2px solid;">Max QTY Of Consumption : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_max }}</span></p>
+        <p style="border-bottom: 2px solid;">VARIANCE : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_var }}</span></p>
+        <p style="border-bottom: 2px solid;">STANDARD DEVIATION : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_std }}</span></p>
+        <p style="border-bottom: 2px solid;">STANDARD DEVIATION ERROR : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_std_error }}</span></p>
+        <p style="border-bottom: 2px solid;">SKEWNESS : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_skew }}</span></p>
+        <p style="border-bottom: 2px solid;">KURTOSIS : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_kurt }}</span></p>
+        <p style="border-bottom: 2px solid;">FIRST QUARTILE : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_q1 }}</span></p>
+        <p style="border-bottom: 2px solid;">SECOND QUARTILE : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_q2 }}</span></p>
+        <p style="border-bottom: 2px solid;">THIRD QUARTILE : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_q3 }}</span></p>
+        <p style="border-bottom: 2px solid;">INTER QUARTILE RANGE : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_iqr }}</span></p>
+        <p style="border-bottom: 2px solid;">Mild_Outlier_LT_IF1 : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_mild_outlier_lt }}</span></p>
+        <p style="border-bottom: 2px solid;">Mild_Outlier_GT_IF2 : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.qty_mild_outlier_gt }}</span></p>
+        <p style="border-bottom: 2px solid;">Extreme_Value_LT_OF1 : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.extreme_value_lt }}</span></p>
+        <p style="border-bottom: 2px solid;">Extreme_Value_GT_OF2 : <span style="color: green;font-style: italic;
+        font-size: xx-large;">
+            {{ qty_stats.extreme_value_gt }}</span></p>
+        {% endif %}
+    </div>
+        {% if qty_stats %}
+            {% if qty_stats.months_of_stock > 2 %}
+                <div class="bk-root">
+                    {{ the_div | safe }}
+                    {{ the_script | safe }}
+                    <p style="text-align:center;"><a href="{% url 'pgraph' productData.code %}">Click here For More Elaborate Graphs</a></p>
+                </div>
+            {% else %}
+                <div style="padding:3rem;">
+                    <p style="text-align:center; color:darkred;">No Available Drawable Graph!</p>
+                    <p style="text-align:center; color:darkred;">Insufficient Data</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<div style="display: flex;
+    flex-direction: column;">
+    <form method="post">
+        {% csrf_token %}
+        <div style="display: flex;
+            flex-direction: column;">
+            <h2 style="color:darkblue; text-align:center;">ADD A NEW PRODUCT FROM HERE</h2>
+            <div style="display:flex; justify-content:space-around; padding:1rem;flex-wrap:wrap;">
+                <div class="box" style="margin-top:0.2rem;border:2px solid;
+                padding-left:2rem;padding-right:2rem;
+                padding-top:0.5rem;padding-bottom:1.5rem;">
+                    <p>PRODUCT CODE </p>
+                    <p style="font-size:smaller;">(The Product Code Is Auto-Generated)</p>
+                    <p style="border-bottom:2px solid">{{ max_code }}</p>
+                    <p>PRODUCT DESCRIPTION</p>
+                    <p>{{ form.description }}</p>
+                    <p>VEN</p>
+                    <p>{{ form.ven }}<p>
+                </div>
+                <div class="box" style="margin-top:0.2rem;border:2px solid; padding-left:2rem;padding-right:2rem;
+                padding-top:0.5rem;padding-bottom:1.5rem;">
+                    <p>UNIT</p>
+                    <p>{{ form.unit }}<p>
+                    <p>PRICE</p>
+                    <p>{{ form.price }}<p>
+                    <p>PLANNED QTY 2 MONTH MEAN</p>
+                    <p>{{ form.planned_Qty_2Month_Mean }}<p>
+                    <p>CURRENT STOCK</p>
+                    <p>{{ form.currentStock }}<p>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center">
+                <button style="color:cornsilk;background:blue;
+                    padding:0.5rem; border:1px solid blue;
+                    border-radius:10%;cursor: pointer;" type="submit">SUBMIT DATA
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<p style="text-align:center;"><a href="{% url 'new_user_unit' %}">Click Here To ADD Product To User Unit</a></p>
+{% endblock %}
+{% block extra_css %}
+<style>
+    input{
+    width:500px;
+    height:15px;
+    border-bottom:1px solid darkblue;
+    border-top:0;border-left:0;border-right:0;
+    }
+    .box{
+        border-radius: 3%;
+        color: darkmagenta
+    }
+</style>
+{% endblock %}
+{% block extra_script %}
+<script type="text/javascript">
+    form_fields = document.querySelectorAll("input");
+    form_fields.forEach((field) =>{
+        field.autocomplete = "OFF";
+    });
+</script>
+{% endblock %}
+
+
+
