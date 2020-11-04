@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'analysis.apps.AnalysisConfig',
-    'procurement.apps.ProcurementConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

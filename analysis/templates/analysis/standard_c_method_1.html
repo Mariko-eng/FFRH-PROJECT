@@ -1,28 +1,27 @@
 {% extends 'analysis_base.html' %}
 
 {% block content%}
-    <h2 style="text-align:center;margin:0;color:darkblue;background:cornsilk;">CONSUMPTION METHOD DATA SUMMARY FOR 3 MONTH CYCLE</h2>
+    <h2 style="text-align:center;margin:0;color:darkblue;background:cornsilk;">ECONOMIC ORDER QUANTITY MODEL DATA SUMMARY FOR 2 MONTH CYCLE</h2>
 <div style="display:flex; justify-content:center; padding:1rem;">
     <div class="side1">
         <table>
             <tr><td>ID</td><td>{{ productData.code }}</td></tr>
             <tr><td>DESCRIPTION</td><td>{{ productData.desc }}</td></tr>
-            <tr><td>PLANNED 3-MONTH QTY MEAN</td><td>{{ productData.planned_qty_3_month_mean }}</td></tr>
-            <tr><td>PLANNED 3-MONTH ORDER COST</td><td>{{ productData.planned_qty_3_month_order_cost }}</td></tr>
-            <tr><td>ANNUAL PLAN COST</td><td>{{ productData.annual_plan_cost }}</td></tr>
-            <tr><td>MEAN MONTHLY CONSUMPTION (AMC)</td><td>{{ productData.amc_in_packs }}</td></tr>
-            <tr><td>AMC ADJUSTED FOR STOCKOUTS</td><td>{{ productData.amc_adjusted_for_stock_outs }}</td></tr>
-            <tr><td>SAFETY STOCK</td><td>{{ productData.safety_stock }}</td></tr>
-            <tr><td>% CHANGE IN CONSUMPTION</td><td>{{ productData.percentage_change_in_consumption }}</td></tr>
-            <tr><td>AMC ADJUSTED FOR CHANGES</td><td>{{ productData.amc_adjusted_for_changes }}</td></tr>
+            <tr><td>PRICE</td><td>{{ productData.price }}</td></tr>
+            <tr><td>PLANNED QTY 1-MONTH MEAN</td><td>{{ productData.planned_qty_1_month_mean }}</td></tr>
+            <tr><td>AVEARGE MONTHLY CONSUMPTION IN PACKS</td><td>{{ productData.amc_in_packs }}</td></tr>
+            <tr><td>ADJUSTED QUANTITY PER WEEK CYCLE</td><td>{{ productData.adjusted_quantity_per_week_cycle }}</td></tr>
+            <tr><td>ADJUSTED ANNUAL CARRYING COST</td><td>{{ productData.adjusted_annual_carrying_cost }}</td></tr>
         </table>
     </div>
     <div class="side2">
         <table>
-            <tr><td>3-MONTH QTY TO PROCURE</td><td>{{ productData.calculated_3_month_qty_to_procure }}</td></tr>
-            <tr><td>3-MONTH CYCLE COST OF PROCUREMENT</td><td>{{ productData.calculated_3_month_cycle_cost_of_procurement }}</td></tr>
-            <tr><td>BUDGETARY DEFICIT IN PLAN DATA/td><td>{{ productData.budget_deficit_in_plan }}</td></tr>
-            <tr><td>PERCENTAGE AVAILABLE FUNDING</td><td>{{ productData.percentage_available_funding }}</td></tr>
+            <tr><td>ADJUSTED ANNUAL ORDERING COST</td><td>{{ productData.adjusted_annual_ordering_cost }}</td></tr>
+            <tr><td>ADJUSTED ANNUAL INVENTORY MGT COST</td><td>{{ productData.adjusted_annual_inventory_mgt_cost }}</td></tr>
+            <tr><tD>ADJUSTED INVESTMENT COST PER CYCLE<td>{{ productData.adjusted_investment_cost_per_cycle }}</td></tr>
+            <tr><td>ADJUSTED PERCENTAGE ANNUAL INVENTORY MGT COST PER DEMAND COST</td>
+                <td>{{ productData.adjusted_percentage_annual_inventory_mgt_cost_per_demand_cost }}</td></tr>
+            <tr><td>NET EFFECT ON INVENTORY MGT COSTS</td><td>{{ productData.net_effect_on_inventory_mgt_costs }}</td></tr>
         </table>
     </div>
 </div>

@@ -1,0 +1,35 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div style="display:flex;flex-direction:column; align-items:center;">
+    <div style="display: flex;
+        justify-content: center; padding-top:1rem;">
+        <form method="get">
+        {% csrf_token %}
+            <select name="stat">
+                <option value="adjusted_quantity_per_week_cycle" selected>ADJUSTED QTY PER WEEK CYCLE</option>
+                <option value="adjusted_annual_carrying_cost">ADJUSTED ANNUAL CARRYING COST</option>
+                <option value="adjusted_annual_ordering_cost">ADJUSTED ANNUAL ORDERING COST</option>
+                <option value="adjusted_annual_inventory_mgt_cost">ADJUSTED ANNUAL INVENTORY MGT COST</option>
+                <option value="adjusted_investment_cost_per_cycle">ADJUSTED INVESTMENT COST PER CYCLE</option>
+                <option value="adjusted_percentage_annual_inventory_mgt_cost_per_demand_cost">
+                    ADJUSTED PERCENTAGE ANNUAL INVENTORY MGT COST PER DEMAND COST</option>
+                <option value="net_effect_on_inventory_mgt_costs">NET EFFECT ON INVENTORY MGT COST</option>
+            </select>
+            <button type="submit">Draw Graph</button>
+        </form>
+    </div>
+
+    <div class="bk-root side2" style="width: 1300px;min-height:550px;overflow: auto;
+    display:flex; flex-direction:column;">
+        <div id="results2" style="width:-webkit-fill-available height:-webkit-fill-available
+        position:absolute;
+        color:cornsilk;background-color: darkblue;"></div>
+        {{ the_div | safe }}
+        {{ the_script | safe }}
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,112 @@
+{% extends 'analysis_base.html' %}
+
+{% block content%}
+<div class="eoq" style="overflow:auto;">
+    <h1 style="text-align:center;margin:0;">DOWNSTREAM LINK - Health Facility Warehouse To User Units</h1>
+    <h2 style="text-align:center;margin:0;">STANDARDISED FIXED QUANTITY SUPPLY PLAN (1-WEEK CYCLE)</h2>
+    <table style="padding:1rem;">
+        <thead>
+        <tr>
+            <th>NO</th>
+            <th>DESCRIPTION</th>
+            <th>PRICE</th>
+            <th>PLANNED QTY 1 MONTH MEAN</th>
+            <th>AVERAGE MONTHLY CONSUMPTION IN PACKS</th>
+            <th>ADJUSTED QUANTITY PER WEEK CYCLE</th>
+            <th>ADJUSTED ANNUAL CARRYING COST</th>
+            <th>ADJUSTED ANNUAL ORDERING COST</th>
+            <th>ADJUSTED ANNUAL INVENTORY MGT COST</th>
+            <th>ADJUSTED INVESTMENT COST PER CYCLE</th>
+            <th>ADJUSTED PERCENTAGE ANNUAL INVENTORY MGT COST PER DEMAND COST</th>
+            <th>NET EFFECT ON INVENTORY MGT COST</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for i in data_df %}
+    <tr>
+        <td><a href="{% url 'weeksupplyplancde' i.code %}">{{ i.code }}</a></td>
+        <td>{{ i.desc }}</td>
+        <td>{{ i.price }}</td>
+        <td>{{ i.planned_qty_1_month_mean }}</td>
+        <td>{{ i.amc_in_packs }}</td>
+        <td>{{ i.adjusted_quantity_per_week_cycle }}</td>
+        <td>{{ i.adjusted_annual_carrying_cost }}</td>
+        <td>{{ i.adjusted_annual_ordering_cost }}</td>
+        <td>{{ i.adjusted_annual_inventory_mgt_cost }}</td>
+        <td>{{ i.adjusted_investment_cost_per_cycle }}</td>
+        <td>{{ i.adjusted_percentage_annual_inventory_mgt_cost_per_demand_cost }}</td>
+        <td>{{ i.net_effect_on_inventory_mgt_costs }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div style="text-align: center">
+    {% if data_df.has_previous %}
+    <a style="margin-right: 10px;" href="{% url 'weeksupplyplanlist' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
+    {% endif %}
+    {% if data_df.has_next %}
+    <a href="{% url 'weeksupplyplanlist' %}?page={{ data_df.next_page_number }}">Next Page</a>
+    {% endif %}
+</div>
+{% endblock %}
+{% block extra_css %}
+<style>
+    .header{
+        background: cornsilk;
+    }
+    body > div > div.header > p{
+        border-top: 1px solid darkcyan;
+        border-left: 2px solid darkblue;
+        border-radius:10%;
+        padding:5px;
+    }
+    body > div > div.header > p:hover{
+        border-top: 2px solid darkblue;
+        border-left: 1px solid darkcyan;
+        transition:3s;
+        transform:scale(1.3)
+    }
+    .eoq{
+        display:flex;
+        flex-direction:column;
+    }
+    h2{
+        color: brown;
+    }
+    h2:hover{
+        color:darkcyan;
+        transition:3s;
+        transform:scaleX(0.5)
+    }
+    th{
+    padding:0;
+    color : darkcyan;
+    transform: rotateZ(15deg);
+    }
+    th:hover{
+    color : darkcyan;
+    transform: rotateZ(360deg);
+    transition:2s;
+    }
+    td{
+    border: 1px solid darkblue;
+    color:darkblue;
+    text-align:center;
+    }
+    tbody>tr:hover{
+    z-index:100;
+    transition:2s;
+    transform:scale(0.98)
+    }
+    tbody>tr>td:hover{
+    border:0;
+    background-color:white;
+    color: brown;
+    text-align:right;
+    z-index:1000;
+    transition:2s;
+    transform:scale(1.5)
+    }
+</style>
+{% endblock %}

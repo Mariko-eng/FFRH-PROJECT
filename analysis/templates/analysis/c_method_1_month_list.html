@@ -2,40 +2,54 @@
 
 {% block content%}
 <div class="eoq" style="overflow:auto;">
-    <h2 style="text-align:center;margin:0;">
-CONSUMPTION METHOD DATA SUMMARY FOR 3 MONTH CYCLE</h2>
+    <h1 style="text-align:center;margin:0;">UPSTREAM LINK - Supplier To Health Facility Warehouse</h1>
+    <h2 style="text-align:center;margin:0;">CONSUMPTION METHOD DATA SUMMARY FOR 1 MONTH CYCLE</h2>
 <table style="padding:1rem;">
     <thead>
     <tr>
         <th>NO</th>
         <th>NAME</th>
-        <th>PLANNED QTY FOR 3 MONTHS</th>
-        <th>ORDER COST FOR 3 MONTHS</th>
+        <th>PRICE</th>
+        <th>PLANNED QTY FOR 1 MONTH</th>
+        <th>PLANNED QTY FOR 1 MONTH ORDER COST</th>
+        <th>PLANNED QTY FOR 1 MONTH ORDER COST (THOUSANDS)</th>
         <th>ANNUAL PLAN COST</th>
-        <th>(AMC) MONTHLY MEAN CONSUMPTION</th>
+        <th>(AMC) MONTHLY AVERAGE CONSUMPTION</th>
+        <th>AMC ADJUSTED FOR STOCK-OUTS</th>
         <th>% CHANGE IN CONSUMPTION </th>
-        <th>AMC ADJUSTED FOR CHANGES</th>
+        <th>MINIMUM AMC</th>
+        <th>MAXIMUM AMC</th>
+        <th>POISSON MODE QUANTITY</th>
         <th>SAFETY STOCK</th>
-        <th>3 MONTH QTY TO PROCURE</th>
-        <th>3 MONTH CYCLE COST OF PROCUREMENT</th>
+        <th>QTY TO PROCURE (1-MONTH)</th>
+        <th>1-MONTH CYCLE COST OF PROCUREMENT</th>
+        <th>1-MONTH CYCLE COST OF PROCUREMENT (THOUSANDS)</th>
+        <th>CONSUMPTION ANNUAL PROCUREMENT COST</th>
         <th>BUDGETARY DEFICIT IN PLAN</th>
-        <th>% AVAILABLE FUNDING</th>
+        <th>PERCENTAGE AVAILABLE FUNDING</th>
     </tr>
     </thead>
     <tbody>
     {% for i in data_df %}
     <tr>
-        <td><a href="{% url 'cmethod3cde' i.CODE %}">{{ i.CODE }}</a></a></td>
-        <td>{{ i.DESCRIPTION }}</td>
-        <td>{{ i.planned_qty_3_month_mean }}</td>
-        <td>{{ i.planned_qty_3_month_order_cost }}</td>
+        <td><a href="{% url 'cmethod1cde' i.code %}">{{ i.code }}</a></td>
+        <td>{{ i.desc }}</td>
+        <td>{{ i.price }}</td>
+        <td>{{ i.planned_qty_1_month_mean }}</td>
+        <td>{{ i.planned_qty_1_month_order_cost }}</td>
+        <td>{{ i.planned_qty_1_month_order_cost_thousands }}</td>
         <td>{{ i.annual_plan_cost }}</td>
         <td>{{ i.amc_in_packs }}</td>
+        <td>{{ i.amc_adjusted_for_stock_outs }}</td>
         <td>{{ i.percentage_change_in_consumption }}</td>
-        <td>{{ i.amc_adjusted_for_changes }}</td>
+        <td>{{ i.min_amc }}</td>
+        <td>{{ i.max_amc }}</td>
+        <td>{{ i.poisson_mode_quantity }}</td>
         <td>{{ i.safety_stock }}</td>
-        <td>{{ i.calculated_3_month_qty_to_procure }}</td>
-        <td>{{ i.calculated_3_month_cycle_cost_of_procurement }}</td>
+        <td>{{ i.qty_to_procure }}</td>
+        <td>{{ i.calculated_1_month_cycle_cost_of_procurement }}</td>
+        <td>{{ i.calculated_1_month_cycle_cost_of_procurement_thousand }}</td>
+        <td>{{ i.consumption_annual_procurement_cost }}</td>
         <td>{{ i.budget_deficit_in_plan }}</td>
         <td>{{ i.percentage_available_funding }}</td>
     </tr>
@@ -43,16 +57,15 @@ CONSUMPTION METHOD DATA SUMMARY FOR 3 MONTH CYCLE</h2>
     </tbody>
 </table>
 </div>
-<div style="text-align: center">
+<div style="margin-right: 10px; text-align: center;">
     {% if data_df.has_previous %}
-    <a style="margin-right: 10px;" href="{% url 'cmethod3list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
+    <a href="{% url 'cmethod1list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
     {% endif %}
     {% if data_df.has_next %}
-    <a href="{% url 'cmethod3list' %}?page={{ data_df.next_page_number }}">Next Page</a>
+    <a href="{% url 'cmethod1list' %}?page={{ data_df.next_page_number }}">Next Page</a>
     {% endif %}
 </div>
 {% endblock %}
-
 {% block extra_css %}
 <style>
     .header{

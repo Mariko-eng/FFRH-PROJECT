@@ -7,20 +7,30 @@
         <table>
             <tr><td>ID</td><td>{{ productData.code }}</td></tr>
             <tr><td>DESCRIPTION</td><td>{{ productData.desc }}</td></tr>
-            <tr><td>PLANNED MONTH QTY MEAN</td><td>{{ productData.planned_Qty_Month_Mean }}</td></tr>
-            <tr><td>PLANNED 2-MONTH ORDER COST</td><td>{{ productData.plannedQty2Month_order_cost }}</td></tr>
-            <tr><td>ANNUAL PLAN COST</td><td>{{ productData.annualplancost }}</td></tr>
+            <tr><td>PRICE</td><td>{{ productData.price }}</td></tr>
+            <tr><td>PLANNED MONTHLY QTY MEAN</td><td>{{ productData.planned_qty_1_month_mean }}</td></tr>
+            <tr><td>PLANNED MONTHLy ORDER COST</td><td>{{ productData.planned_qty_1_month_order_cost }}</td></tr>
+            <tr><td>PLANNED MONTHLy ORDER COST (THOUSANDS)</td>
+                <td>{{ productData.planned_qty_1_month_order_cost_thousands }}</td></tr>
+            <tr><td>ANNUAL PLAN COST</td><td>{{ productData.annual_plan_cost }}</td></tr>
             <tr><td>MEAN MONTHLY CONSUMPTION (AMC)</td><td>{{ productData.amc_in_packs }}</td></tr>
-            <tr><td>AMC ADJUSTED FOR STOCKOUTS</td><td>{{ productData.amc_adjusted_for_stockouts }}</td></tr>
-            <tr><td>SAFETY STOCK</td><td>{{ productData.safety_stock }}</td></tr>
+            <tr><td>AMC ADJUSTED FOR STOCK_OUTS</td><td>{{ productData.amc_adjusted_for_stock_outs }}</td></tr>
             <tr><td>% CHANGE IN CONSUMPTION</td><td>{{ productData.percentage_change_in_consumption }}</td></tr>
-            <tr><td>AMC ADJUSTED FOR CHANGES</td><td>{{ productData.amc_adjusted_for_changes }}</td></tr>
+            <tr><td>MIN AMC</td><td>{{ productData.min_amc }}</td></tr>
+            <tr><td>MAX AMC</td><td>{{ productData.max_amc }}</td></tr>
+            <tr><td>POISSON MODE QTY</td><td>{{ productData.poisson_mode_quantity }}</td></tr>
         </table>
     </div>
     <div class="side2">
         <table>
-            <tr><td>2-MONTH QTY TO PROCURE</td><td>{{ productData.calculated_2Month_qty_to_procure }}</td></tr>
-            <tr><td>2-MONTH CYCLE COST OF PROCUREMENT</td><td>{{ productData.calculated_2Month_cost_of_procurement }}</td></tr>
+            <tr><td>SAFETY STOCK</td><td>{{ productData.safety_stock }}</td></tr>
+            <tr><td>MONTHLY QTY TO PROCURE</td><td>{{ productData.qty_to_procure }}</td></tr>
+            <tr><td>1-MONTH CYCLE COST OF PROCUREMENT</td>
+                <td>{{ productData.calculated_1_month_cycle_cost_of_procurement }}</td></tr>
+            <tr><td>1-MONTH CYCLE COST OF PROCUREMENT (THOUSANDS)</td>
+                <td>{{ productData.calculated_1_month_cycle_cost_of_procurement_thousand }}</td></tr>
+            <tr><td>CONSUMPTION ANNUAL PROCUREMENT COST</td>
+                <td>{{ productData.consumption_annual_procurement_cost }}</td></tr>
             <tr><td>BUDGETARY DEFICIT IN PLAN DATA</td><td>{{ productData.budget_deficit_in_plan }}</td></tr>
             <tr><td>PERCENTAGE AVAILABLE FUNDING</td><td>{{ productData.percentage_available_funding }}</td></tr>
         </table>

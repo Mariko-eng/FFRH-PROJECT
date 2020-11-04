@@ -2,13 +2,17 @@
 
 {% block content%}
 <div class="eoq" style="overflow:auto;">
-    <h2 style="text-align:center;margin:0;">ECONOMIC ORDER QUANTITY MODEL DATA SUMMARY FOR 2 MONTH CYCLE</h2>
+    <h1 style="text-align:center;margin:0;">DOWNSTREAM LINK - Health Facility Warehouse To User Units</h1>
+    <h2 style="text-align:center;margin:0;">ECONOMIC ORDER QUANTITY MODEL DATA SUMMARY FOR 1 MONTH CYCLE</h2>
     <table style="padding:1rem;">
         <thead>
         <tr>
             <th>NO</th>
             <th>NAME</th>
-            <th>MONTHLY MEAN CONSUMPTION IN PACKS</th>
+            <th>PRICE</th>
+            <th style="color:darkred;">PLANNED QTY 1-MONTH MEAN</th>
+            <th>PLANNED QTY 1-MONTH ORDER COST</th>
+            <th>PLANNED QTY 1-MONTH ORDER COST (THOUSANDS)</th>
             <th>YEARLY DEMAND</th>
             <th>CARRYING COST</th>
             <th>ORDERING COST</th>
@@ -20,9 +24,11 @@
             <th>LENGTH OF ORDER CYCLE (DAYS)</th>
             <th>NUMBER OF CYCLES PER YEAR</th>
             <th>INVESTMENT COST PER CYCLE</th>
-            <th>INVESTMENT COST PER YEAR</th>
+            <th>ANNUAL INVESTMENT COST</th>
+            <th>ANNUAL INVESTMENT COST (MILLIONS)</th>
             <th>ANNUAL TOTAL COST</th>
-            <th>PERCENTAGE INVENTORY MGT COST</th>
+            <th>ANNUAL TOTAL COST (MILLIONS)</th>
+            <th>PERCENTAGE ANNUAL INVENTORY MGT COST PER DEMAND COST</th>
             <th>PLAN BUDGET DEFICIT</th>
             <th>PERCENTAGE AVAILABLE FUNDING</th>
             <th>Funding_Position</th>
@@ -31,10 +37,13 @@
         <tbody>
     {% for i in data_df %}
     <tr>
-        <td><a href="{% url 'eoq2cde' i.CODE %}">{{ i.CODE }}</a></td>
+        <td><a href="{% url 'eoq1cde' i.CODE %}">{{ i.CODE }}</a></td>
         <td>{{ i.DESCRIPTION }}</td>
-        <td>{{ i.amc_in_packs }}</td>
-        <td>{{ i.yearly_demand }}</td>
+        <td>{{ i.price }}</td>
+        <td style="color:darkred;">{{ i.planned_qty_1_month_mean }}</td>
+        <td>{{ i.planned_qty_1_month_order_cost }}</td>
+        <td>{{ i.planned_qty_1_month_order_cost_thousands }}</td>
+        <td>{{ i.year_demand }}</td>
         <td>{{ i.carrying_cost }}</td>
         <td>{{ i.ordering_cost }}</td>
         <td style="color:darkred;">{{ i.economic_order_quantity }}</td>
@@ -45,11 +54,13 @@
         <td>{{ i.length_of_order_cycle_days }}</td>
         <td>{{ i.number_cycles_per_year }}</td>
         <td>{{ i.investment_cost_per_cycle }}</td>
-        <td>{{ i.investment_cost_per_year }}</td>
+        <td>{{ i.annual_investment_cost }}</td>
+        <td>{{ i.annual_investment_cost_millions }}</td>
         <td>{{ i.annual_total_cost }}</td>
-        <td>{{ i.percentage_inventory_mgt_cost }}</td>
+        <td>{{ i.annual_total_cost_millions }}</td>
+        <td>{{ i.percentage_annual_inventory_mgt_cost_per_demand_cost }}</td>
         <td>{{ i.plan_budget_deficit }}</td>
-        <td>{{ i.percentage_available__funding }}</td>
+        <td>{{ i.percentage_available_funding }}</td>
         <td>{{ i.Funding_Position }}</td>
         </tr>
         {% endfor %}
@@ -58,10 +69,10 @@
 </div>
 <div style="text-align: center">
     {% if data_df.has_previous %}
-    <a style="margin-right: 10px;" href="{% url 'eoq2list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
+    <a style="margin-right: 10px;" href="{% url 'eoq1list' %}?page={{ data_df.previous_page_number }}">Previous Page</a>
     {% endif %}
     {% if data_df.has_next %}
-    <a href="{% url 'eoq2list' %}?page={{ data_df.next_page_number }}">Next Page</a>
+    <a href="{% url 'eoq1list' %}?page={{ data_df.next_page_number }}">Next Page</a>
     {% endif %}
 </div>
 {% endblock %}
