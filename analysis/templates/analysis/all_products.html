@@ -2,9 +2,18 @@
 
 {% block content %}
 <h1 style="text-align : center;color : blue; ">Analysis | Available Drugs </h1>
-<h4 style="text-align : center;color : green; ">Click To Item Code Or Description for More Stats.  </h4>
+<h4 style="text-align : center;color : green; ">Click To Item Code Or Description for More Stats And Graphs In the Table OR Directly Search Below .  </h4>
 
-<div style="display:flex; justify-content:center;">
+<div style="display:flex; flex-direction:column;z-index:1; align-items:center;">
+    <p style="margin-top:0px;margin-bottom:0px;width: -webkit-fill-available;padding-left:4rem;padding-right:4rem;
+position:relative;">
+        <input id="searchbar2" type="text" placeholder="Search Using Product Name"
+        style="width: -webkit-fill-available;  ">
+        <div id="results2" style="width:-webkit-fill-available height:-webkit-fill-available
+        position:absolute;color:white;background-color: darkgray; z-index:100;">
+    </div>
+    </p>
+
     <table>
         <thead>
             <tr>
@@ -15,7 +24,7 @@
         <tbody>
         {% for product in allProducts %}
         <tr><td><a href="{% url 'ap_currentStock' product.code %}">{{ product.code }}</a></td>
-            <td>{{ product.description }}</td>
+            <td><a href="{% url 'ap_currentStock' product.code %}">{{ product.description }}</a></td>
             <td>{{ product.ven }}</td>
             <td>{{ product.unit }}</td>
             <td>{{ product.price }}</td>
@@ -25,5 +34,23 @@
         </tbody>
     </table>
 </div>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    $(document).ready(function(){
+        $("#searchbar2").keyup(function(){
+            $.ajax({
+                type : "GET",
+                url : "/analysis/ajax/request/all/products/",
+                data : {'cde':$("#searchbar2").val()},
+                dataType : "html",
+                success:function(data){
+                    $("#results2").html(data);
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
 

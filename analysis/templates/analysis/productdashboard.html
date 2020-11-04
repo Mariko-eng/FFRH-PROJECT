@@ -14,24 +14,24 @@
         <p><a href="{% url 'productVisual' %}">~Get Single Product Stats</a></p>
         <p><a href="{% url 'a_currentStock' %}">~Get All Products</a></p>
         <hr/>
-        <p style="color: aqua;">CONSUMPTION METHODS</p>
-        <p><a href="{% url 'cmethod2list' %}">~~ 2-Month Consumption Method</a></p>
-        <p style="padding:0.5rem;"><a href="{% url 'graphs2c' %}">~~ Consumption Graphs</a></p>
-        <p><a href="{% url 'cmethod3list' %}">~~ 3-Month Consumption Method</a></p>
-        <p style="padding:0.5rem;"><a href="{% url 'graphs3c' %}">~~ Consumption Graphs</a></p>
+        <h4 style="color: aqua;">UPSTREAM LINK-Supplier To Health Facility Warehouse</h4>
+        <p><a href="{% url 'cmethod1list' %}">~~ 1-Month Consumption Method Data</a></p>
+        <p><a href="{% url 'graphs1c' %}">~ Graph - Month Consumption Method</a></p>
         <hr/>
-        <p style="color: aqua;">ECONOMIC ORDER QUANTITY MODELS</p>
-        <p><a href="{% url 'eoq2list' %}">~~ 2-Month Economic Order Quantity Model</a></p>
-        <p style="padding:0.5rem;"><a href="{% url 'graphs2e' %}">~~ EOQ Graphs</a></p>
-        <p><a href="{% url 'eoq3list' %}">~~ 3-Month Economic Order Quantity Model</a></p>
-        <p style="padding:0.5rem;"><a href="{% url 'graphs2e' %}">~~ EOQ Graphs</a></p>
+        <h4 style="color: aqua;">DOWNSTREAM LINK-Health Facility Warehouse To User Units</h4>
+        <h5 style="color: lightblue;">FOR 1-MONTH</h5>
+        <p><a href="{% url 'eoq1list' %}">~~ 1-Month Economic Order Quantity Data</a></p>
+        <p><a href="{% url 'grapheoq1' %}">~ Graph - Economic Order Quantity</a></p>
+        <h5 style="color: lightblue;">FOR 1-WEEK ADJUSTMENT</h5>
+        <p><a href="{% url 'weeksupplyplanlist' %}">~~ 1-Standardised Fixed Quantity Supply Plan</a></p>
+        <p><a href="{% url 'graphweeksupplyplanlist' %}">~ Graph - Standardised Fixed Quantity Supply Plan</a></p>
+        <hr/>
         <p style="color: aqua;">~~ FUNDING POSITION</p>
-        <p><a href="{% url 'underfunding2' %}">~~ 2-Month UNDER FUNDING</a></p>
-        <p><a href="{% url 'overfunding2' %}">~~ 2-Month OVER FUNDING</a></p>
-        <p><a href="{% url 'underfunding3' %}">~~ 3-Month UNDER FUNDING</a></p>
-        <p><a href="{% url 'overfunding3' %}">~~ 3-Month OVER FUNDING</a></p>
+        <p><a href="{% url 'under_funding_1_month' %}">~~ 1-Month UNDER FUNDING</a></p>
+        <p><a href="{% url 'adequate_funding_1_month' %}">~~ 1-Month ADEQUATE FUNDING</a></p>
+        <p><a href="{% url 'over_funding_1_month' %}">~~ 1-Month OVER FUNDING</a></p>
     </div>
-    <div class="bk-root side2" style="width: 1400px;height:550px;overflow: auto;
+    <div class="bk-root side2" style="width: 1300px;height:550px;overflow: auto;
     display:flex; flex-direction:column;">
         <p style="margin-top:0px;
         margin-bottom:0px;"><input id="searchbar2" type="text" placeholder="Search Product CODE And NAME"
@@ -74,7 +74,7 @@
     }
     .side{
         font-size:smaller;
-        width:180px;
+        width:280px;
         margin-right: 1.2rem;
         background:maroon;
         padding:10px;
